@@ -9,7 +9,7 @@ namespace API.Models
         [Required]
         public string FirstName { get; set; }
         [Required]
-        public string LasttName { get; set; }
+        public string LastName { get; set; }
         public DateTime DateCreated { get; set; } = DateTime.UtcNow;
 
     }
