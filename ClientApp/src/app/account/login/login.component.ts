@@ -1,4 +1,7 @@
 import { Component } from '@angular/core';
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { AccountService } from '../account.service';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-login',
@@ -6,5 +9,42 @@ import { Component } from '@angular/core';
   styleUrls: ['./login.component.css']
 })
 export class LoginComponent {
+  loginForm: FormGroup = new FormGroup({});
+  submitted = false;
+  errorMessages: string[] = [];
 
+  constructor(private accountService: AccountService,
+    private formBuilder: FormBuilder,
+    private router: Router) {}
+
+    ngOnInit(): void {
+      this.initializeForm();
+    }
+
+  initializeForm() {
+    this.loginForm = this.formBuilder.group({
+      userName: ['', Validators.required],
+      password: ['', Validators.required],
+    })
+  }
+
+  login() {
+    this.submitted = true;
+    this.errorMessages = [];
+
+    //if (this.loginForm.valid) {
+      this.accountService.login(this.loginForm.value).subscribe({
+        next: (response: any) => {
+
+        },
+        error: error => {
+          if (error.error.errors) {
+            this.errorMessages = error.error.errors;
+          } else {
+            this.errorMessages.push(error.error);
+          }
+        }
+      })
+   // }
+  }
 }

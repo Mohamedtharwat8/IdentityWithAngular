@@ -9,11 +9,11 @@ namespace API.DTOs.Account
         [StringLength(15, MinimumLength = 3, ErrorMessage = "First name must be at least {2}, and Maximum {1} Characters!")]
         public string FirstName { get; set; }
         [Required]
-        //[StringLength(15, MinimumLength = 3, ErrorMessage = "Last name must be at least {2}, and Maximum {1} Characters!")]
+        [StringLength(15, MinimumLength = 3, ErrorMessage = "Last name must be at least {2}, and Maximum {1} Characters!")]
         public string LastName { get; set; }
 
         [Required]
-        //[RegularExpression("", ErrorMessage = " Invalide Emai  Address "  )]
+        [RegularExpression("^[a-zA-Z0-9_-]+@[a-zA-Z0-9_-]+(\\.[a-zA-Z0-9_-]+)+$", ErrorMessage = " Invalide Email  Address ")]
         public string Email { get; set; }
         [Required]
         [StringLength(15, MinimumLength = 6, ErrorMessage = " Password must be at least {2}, and Maximum {1} Characters!")]
