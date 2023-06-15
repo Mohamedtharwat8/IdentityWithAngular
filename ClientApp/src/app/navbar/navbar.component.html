@@ -1,38 +1,44 @@
 <header>
-  <nav class=" navbar navbar-expand-lg navbar-dark bg-primary">
-    <div class="container">
+  <nav class="navbar navbar-expand-lg navbar-dark bg-primary">
+      <div class="container">
+          <a class="nav-brand">
+              <img src="./assets/images/logo.png" class="me-3" alt="Logo">
+          </a>
+          <button class="navbar-toggler" type="button">
+              <span class="navbar-toggler-icon"></span>
+          </button>
+          <div class="collapse navbar-collapse">
+              <ul class="navbar-nav me-auto">
+                  <li class="nav-item">
+                      <a class="nav-link" routerLink="/" routerLinkActive="active"
+                          [routerLinkActiveOptions]="{exact: true}">Home</a>
+                  </li>
+                  <li class="nav-item">
+                      <a class="nav-link" routerLink="/rolles" routerLinkActive="active">Rolles</a>
+                  </li>
+              </ul>
 
-      <a class="nav-brand">
-        <img src="./assets/images/logo.png" claas="me-3" alt="logo" />
-      </a>
+              <ul class="navbar-nav" *ngIf="(accountService.user$ | async) === null">
+                  <li class="nav-item">
+                      <a class="btn btn-secondary mx-2" routerLink="/account/register" routerLinkActive="active">
+                          Create account
+                      </a>
+                  </li>
+                  <li class="nav-item">
+                      <a class="btn btn-secondary" routerLink="/account/login" routerLinkActive="active">
+                          Login
+                      </a>
+                  </li>
+              </ul>
 
-      <button class="navbar-toggler" type="button">
-        <span class="navbar-toggler-icon"></span>
-      </button>
-      <div class="collapse navbar-collapse">
+              <div class="d-flex align-items-center" *ngIf="(accountService.user$ | async) as user">
+                  <a class="text-white" style="text-decoration: none; cursor: pointer;">
+                      Hi <span class="h3 text-warning">{{user.firstName | titlecase}}</span>
+                  </a>
+                  <a class="btn btn-secondary ms-2" (click)="logout()">Logout</a>
+              </div>
 
-        <ul class="navbar-nav me-auto">
-        <li class="nav-item">
-          <a class="nav-link" routerLink="/" routerLinkActive="active" [routerLinkActiveOptions]="{exact:true}">Home</a>
-        </li>
-
-        <li class="nav-item">
-          <a class="nav-link" routerLink="/rolles" routerLinkActive="active">Rolles</a>
-        </li>
-        </ul>
-
-
-        <ul class="navbar-nav ">
-          <li class="nav-item">
-            <a class="btn btn-secondary mx-2"routerLink="/account/register" routerLinkActive="active">Create Account</a>
-          </li>
-
-          <li class="nav-item">
-            <a class="btn btn-secondary" routerLink="/account/login" routerLinkActive="active">Login</a>
-          </li>
-          </ul>
+          </div>
       </div>
-    </div>
-
   </nav>
 </header>
